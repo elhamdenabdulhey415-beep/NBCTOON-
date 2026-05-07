@@ -1,0 +1,24 @@
+# ملف إعدادات Codemagic لبناء تطبيق NBCTOON
+workflows:
+  android-workflow:
+    name: Android Build
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      node: 18
+      vars:
+        PACKAGE_NAME: "com.nbctoon.app" # مستخرج من ملف app.json الخاص بك
+    scripts:
+      - name: Install dependencies
+        script: |
+          yarn install
+      - name: Build Android APK
+        script: |
+          npx expo export
+          npx eas build --platform android --profile development --local --non-interactive
+    artifacts:
+      - android/app/build/outputs/apk/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - abdulheyelderit@gmail.com # بريدك الإلكتروني المسجل في النظام
