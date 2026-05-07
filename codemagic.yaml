@@ -2,12 +2,13 @@
 workflows:
   android-workflow:
     name: Android Build
+    working_directory: .
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
       node: 18
       vars:
-        PACKAGE_NAME: "com.nbctoon.app" # مستخرج من ملف app.json الخاص بك
+        PACKAGE_NAME: "com.nbctoon.app"
     scripts:
       - name: Install dependencies
         script: |
@@ -21,4 +22,4 @@ workflows:
     publishing:
       email:
         recipients:
-          - abdulheyelderit@gmail.com # بريدك الإلكتروني المسجل في النظام
+          - abdulheyelderit@gmail.com
